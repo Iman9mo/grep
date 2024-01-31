@@ -90,7 +90,7 @@ Key Features of Electron:
 
 By leveraging Electron, developers can create powerful, cross-platform desktop applications with a familiar web development workflow, making it an excellent choice for projects ranging from small utilities to complex, feature-rich applications.
 
-### output
+## output
 
 ![Sample Image](https://github.com/Iman9mo/grep/blob/37366b74fb9605deca5beddf5374531a25d2f29d/Screenshot%20from%202024-01-30%2020-54-24.png)
 
@@ -99,7 +99,7 @@ By leveraging Electron, developers can create powerful, cross-platform desktop a
 > The pthread library is required.
 > The program uses the clock() function to measure execution time, which may not provide precise timing information. Consider using more accurate timers for production-level profiling.
 
-### overview of the main components and functionality:
+## overview of the main components and functionality:
 
 **Global Variables**:
 pthread_mutex_t readWriteMutex: Mutex for protecting the critical section where the matches set is updated.
