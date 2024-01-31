@@ -1,6 +1,6 @@
 # grep file search
 
-The purose of this project is implementing a program like grep program in linux using multi-thread. This tool is using for searching words in text files.
+The purpose of this project is implementing a program like grep program in linux using multi-thread. This tool is using for searching words in text files.
 
 ## project description
 
