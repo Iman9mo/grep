@@ -31,29 +31,29 @@ This C++ program traverses a directory tree, searches for a specified string or 
 
 ### overview of the main components and functionality:
 
-    **Global Variables**:
-        pthread_mutex_t readWriteMutex: Mutex for protecting the critical section where the matches set is updated.
-        pthread_mutex_t discoverFileMutex: Mutex for protecting the critical section where the discoveredFiles set is updated.
-        set<string> matches: Set to store the matched results (file paths, line numbers, and positions).
-        set<string> discoveredFiles: Set to store the duration and file paths of discovered files.
+**Global Variables**:
+pthread_mutex_t readWriteMutex: Mutex for protecting the critical section where the matches set is updated.
+pthread_mutex_t discoverFileMutex: Mutex for protecting the critical section where the discoveredFiles set is updated.
+set<string> matches: Set to store the matched results (file paths, line numbers, and positions).
+set<string> discoveredFiles: Set to store the duration and file paths of discovered files.
 
-    **searchInFile Function**:
-        This function is executed by each thread to search for a string or pattern in a specific file.
-        It takes a filename, search string, and search regex as parameters.
-        If searchRegex is set to "noRegex," it searches for the string using string::find.
-        If searchRegex is not "noRegex," it uses regular expressions (std::regex) to find matches.
-        The matching results are added to the matches set.
-        The duration of the search is calculated and added to the discoveredFiles set.
+**searchInFile Function**:
+This function is executed by each thread to search for a string or pattern in a specific file.
+It takes a filename, search string, and search regex as parameters.
+If searchRegex is set to "noRegex," it searches for the string using string::find.
+If searchRegex is not "noRegex," it uses regular expressions (std::regex) to find matches.
+The matching results are added to the matches set.
+The duration of the search is calculated and added to the discoveredFiles set.
 
-    **processDirectory Function**:
-        This function processes a directory and its subdirectories recursively.
-        For each regular file, a new thread is created to search for the specified string/pattern using pthread_create.
-        For each subdirectory, a new process is created using fork, and the search is performed recursively in the child process.
-        Inter-process communication is achieved using pipes (pipe function) to exchange the results between parent and child processes.
-        The matching results from child processes are added to the matches set, and the discovered files' duration and paths are added to the discoveredFiles set.
-        The function utilizes mutexes to protect shared data structures (matches and discoveredFiles sets).
+**processDirectory Function**:
+This function processes a directory and its subdirectories recursively.
+For each regular file, a new thread is created to search for the specified string/pattern using pthread_create.
+For each subdirectory, a new process is created using fork, and the search is performed recursively in the child process.
+Inter-process communication is achieved using pipes (pipe function) to exchange the results between parent and child processes.
+The matching results from child processes are added to the matches set, and the discovered files' duration and paths are added to the discoveredFiles set.
+The function utilizes mutexes to protect shared data structures (matches and discoveredFiles sets).
 
-    **main Function**:
-        The main function takes command-line arguments for the directory path, search regex, and searched string.
-        It calls the processDirectory function to initiate the search.
-        After the search is complete, it prints the matching results and discovered files' information.
+**main Function**:
+The main function takes command-line arguments for the directory path, search regex, and searched string.
+It calls the processDirectory function to initiate the search.
+After the search is complete, it prints the matching results and discovered files' information.
